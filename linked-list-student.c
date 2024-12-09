@@ -84,6 +84,49 @@ void insert (Node **head, int k, int x) {
     newNode -> next = temp -> next;
     temp -> next = newNode;
 }
+// xoa node dau
+/**
+ * - cho Node head luu Node thu 2 trong dslk dat la temp
+ * - free(temp)
+ */
+void popFront(Node **head) {
+    if (*head == NULL) {
+        return ;
+    }
+    Node * temp = *head;
+    *head = temp -> next;
+    free(temp);
+}
+// xoa node cuoi cung cua dslk
+/**
+ * 
+ */
+void popBack(Node **head) {
+    if(*head == NULL) {
+        return ;
+    }
+    Node *temp = *head; // cho node temp tro toi node dau
+    /**
+     * neu dslk chi co 1 node, xu ly rieng 
+     */
+    if(temp -> next == NULL) { 
+        *head = NULL;
+        free(temp);
+        return;
+    }
+    /**
+     * - tim toi node thu 2 tu cuoi ve, goi la temp
+     * - cho phan next cua node temp tro vao NULL
+     * - free(temp)
+     */
+    while(temp -> next -> next != NULL) {
+        temp = temp -> next;
+    } 
+    Node *last = temp -> next;
+    temp -> next = NULL;
+    free(temp);
+    
+}
 int main() {
     Node *head = NULL;
     while(1) {
@@ -91,6 +134,7 @@ int main() {
         printf("2. them vao cuoi\n");
         printf("3. them vao giua\n");
         printf("4. duyet\n");
+        printf("5. xoa phan tu dau\n");
         printf("0. thoat\n");
         printf("---------------------\n");
         printf("nhap lua chon : ");
@@ -119,6 +163,10 @@ int main() {
         }
         else if(lc == 4) {
             scan(head);
+            printf("\n");
+        }
+        else if(lc == 5) {
+            popFront(&head);
             printf("\n");
         }
         else {
