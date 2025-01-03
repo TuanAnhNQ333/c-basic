@@ -1,0 +1,1 @@
+char arr[n][n];
